@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Openings Analytics</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Chess Openings Analytics Dashboard</h1>
+      <p>Interactive analysis of openings, performance, and trends</p>
+    </header>
+
+    <section class="controls card">
+      <div class="filters-grid">
+        <label>Colour
+          <select id="colourFilter"></select>
+        </label>
+        <label>ECO
+          <select id="ecoFilter"></select>
+        </label>
+        <label>Family
+          <select id="familyFilter"></select>
+        </label>
+        <label>Search Opening
+          <input id="searchInput" type="text" placeholder="e.g. Sicilian" />
+        </label>
+        <label>Min Games
+          <input id="minGamesInput" type="number" min="0" value="0" />
+        </label>
+        <label>Perf Rating Min
+          <input id="minPerfInput" type="number" min="0" value="0" />
+        </label>
+        <label>Avg Player Min
+          <input id="minAvgPlayerInput" type="number" min="0" value="0" />
+        </label>
+        <label>Player Win % Min
+          <input id="minWinPctInput" type="number" min="0" max="100" step="0.1" value="0" />
+        </label>
+      </div>
+    </section>
+
+    <section class="kpis">
+      <article class="card"><h3>Total Games</h3><p id="kpiTotalGames">0</p></article>
+      <article class="card"><h3>Openings</h3><p id="kpiOpenings">0</p></article>
+      <article class="card"><h3>Top Opening</h3><p id="kpiTopOpening">-</p></article>
+      <article class="card"><h3>Weighted Win %</h3><p id="kpiWeightedWin">-</p></article>
+      <article class="card"><h3>Average Perf Rating</h3><p id="kpiAvgPerf">-</p></article>
+    </section>
+
+    <section class="charts-grid">
+      <article class="card chart-card">
+        <h3>Top Openings by Num Games</h3>
+        <canvas id="topOpeningsChart"></canvas>
+      </article>
+      <article class="card chart-card">
+        <h3>Games by Colour</h3>
+        <canvas id="colourChart"></canvas>
+      </article>
+      <article class="card chart-card wide">
+        <h3>Num Games vs Player Win %</h3>
+        <canvas id="scatterChart"></canvas>
+      </article>
+      <article class="card chart-card wide">
+        <h3>ECO Popularity (Top 12)</h3>
+        <canvas id="ecoChart"></canvas>
+      </article>
+    </section>
+
+    <section class="card table-wrap">
+      <h3>Filtered Data</h3>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Opening</th>
+            <th>Family</th>
+            <th>Colour</th>
+            <th>Num Games</th>
+            <th>ECO</th>
+            <th>Perf Rating</th>
+            <th>Avg Player</th>
+            <th>Player Win %</th>
+            <th>Draw %</th>
+            <th>Opponent Win %</th>
+            <th>Last Played</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
